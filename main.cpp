@@ -67,13 +67,15 @@ int main() {
 
 	cout << "Analisando coflito de interesses para realizar as coletas!" << endl;
 
+	
+
 	int coleta=0;
 	for(int i=0; i<n; i++){
 		for(int j=0; j<n; j++){
 			if(sistemaUsuario.getUsuario(i).getDoador() != sistemaUsuario.getUsuario(j).getDoador()){
 
-				for(int k=0; k<sistemaUsuario.getUsuario(i).getSize(); k++){
-					for(int l=0; k<sistemaUsuario.getUsuario(j).getSize(); l++){
+				for(int k=0; k < sistemaUsuario.getUsuario(i).getSize(); k++){
+					for(int l=0; l < sistemaUsuario.getUsuario(j).getSize(); l++){
 
 						if(sistemaUsuario.getUsuario(i).getResInter(k)==sistemaUsuario.getUsuario(j).getResInter(l)){
 							coleta++;
@@ -83,7 +85,8 @@ int main() {
 			}
 		}
 	}
-	cout << coleta << " materiais coletados(s) com sucesso!" << endl;
+
+	cout << coleta/2 << " materiais coletados(s) com sucesso!" << endl; //divide coleta por 2, pois o for conta os residuos 2 vezes//
 
 	/*
 	if (sistemaUsuario.getUsuario(i).getDoador() != sistemaUsuario.getUsuario(j).getDoador())
