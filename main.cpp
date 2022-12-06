@@ -1,36 +1,149 @@
 #include <iostream>
-#include "residuo.h"
-#include "residuo_liquido.h"
-#include "residuo_solido.h"
-#include "pessoa.h"
-#include "juridica.h"
-#include "fisica.h"
-#include "ponto_coleta.h"
-#include "agendamento.h"
+#include "SistemaRes.h"
+#include "SistemaUsuario.h"
+#include "Solido.h"
+#include "Liquido.h"
 
-int main(){
+using namespace std;
 
-    Residuo res;
-        res.adcionarResiduo();
-        res.removerResiduo();
-        res.~Residuo();
+int main() {
 
-    Ponto_Coleta pnt;
-        pnt.get_endereco();
-        pnt.get_reside();
-        pnt.~Ponto_Coleta();
+	SistemaRes sistemaResiduo;
+	
+	cout << "Quantos residuos desejam cadastrar? ";
+	int n, LS;
+	string nomeRes;
+	cin >> n;
+	cout << "Cadastrando residuos...";
 
-    Pessoa p;
-        p.get_doador();
-        p.get_nome_pessoa();
-        p.get_receptor();
-        p.~Pessoa();
+	for (int i = 0; i < n; i++) {
+		cout << "Escolha um residuo " << endl;
+		cout << "(insira o numero correspondente)Ele e liquido(0) ou solido(1)? ";
+		cin >> LS;
+		if (LS == 0)
+		{
+			cout << "Qual o nome do liquido a ser cadastrado? ";
+			cin >> nomeRes;
+			Liquido l(nomeRes);
+			sistemaResiduo.insert(l);
+		}
+		else
+		{
+			cout << "Qual o nome do solido a ser cadastrado? ";
+			cin >> nomeRes;
+			Solido s(nomeRes);
+			sistemaResiduo.insert(s);
 
-    Agendamento ag;
-        ag.get_data();
-        ag.get_local();
-        ag.get_realizada();
-        ag.~Agendamento();
-    
-    return 0;
+		}
+		cout << endl;
+	}
+
+	SistemaUsuario sistemaUsuario;
+
+	cout << "Quantos usuarios vc quer cadastrar? ";
+	cin >> n;
+
+	for (int i = 0; i < n; i++) {
+
+		int doador;
+		cout << "(insira o numero correspondente)vc e um: doador(1) ou receptor(0)? ";
+		cin >> doador;
+		cout << endl;
+
+		string cadastroNome;
+		cout << "Insira seu nome: ";
+		cin >> cadastroNome;
+		cout << endl;
+
+		long long int cpfnj;
+		cout << "Qual CPF ou CNPJ? ";
+		cin >> cpfnj;
+		cout << endl;
+
+		Usuario y(cadastroNome, cpfnj, doador);
+		sistemaUsuario.insert(y);
+
+	}
+
+	cout << "Analisando coflito de interesses para realizar as coletas!" << endl;
+
+	int coleta=0;
+	for(int i=0; i<n; i++){
+		for(int j=0; j<n; j++){
+			if(sistemaUsuario.getUsuario(i).getDoador() != sistemaUsuario.getUsuario(j).getDoador()){
+
+				for(int k=0; k<sistemaUsuario.getUsuario(i).getSize(); k++){
+					for(int l=0; k<sistemaUsuario.getUsuario(j).getSize(); l++){
+
+						if(sistemaUsuario.getUsuario(i).getResInter(k)==sistemaUsuario.getUsuario(j).getResInter(l)){
+							coleta++;
+						}
+					}
+				}	
+			}
+		}
+	}
+	cout << coleta << " materiais coletados(s) com sucesso!" << endl;
+
+	/*
+	if (sistemaUsuario.getUsuario(i).getDoador() != sistemaUsuario.getUsuario(j).getDoador())
+	{...}
+	*/
+
+
+
+
+
+
+
+
+
+
+
+	/*
+	
+
+
+	//---------TESTANDO SISTEMA DE CADASTRO DE USUARIO----------
+	SistemaUsuario teste;
+	Usuario user1("Matheus", 486953217850, 1);
+	Usuario user2("Thiago", 548846251111, 0);
+	teste.insert(user1);
+	teste.insert(user2);
+
+
+
+
+	//-----------SISTEMA DE COLETA-------------//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	SistemaRes sistemaResiduo;
+
+	Liquido l1("oleo");
+	Solido s1("papel");
+	Solido s2("metal");
+
+	sistemaResiduo.insert(l1);
+	sistemaResiduo.insert(s1);
+	sistemaResiduo.insert(s2);
+	*/
+
 }
