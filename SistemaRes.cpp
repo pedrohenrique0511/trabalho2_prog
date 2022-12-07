@@ -12,16 +12,16 @@ SistemaRes::SistemaRes() {
 
 	size = 0;
 }
-
-/*void SistemaRes::imprime() {
+/*
+void SistemaRes::imprime() {
 
 	for (int i = 0; i < size; i++)
 	{
-		cout << cadastrado[i].getNome() << " ";
+		cout << getRes(i).getNome() << " ";
 	}
 	cout << endl;
-}*/
-
+}
+*/
 void SistemaRes::insert(Residuo newRes) {
 
 	for (int i = 0; i <= size; i++)
@@ -70,3 +70,6 @@ void SistemaRes::erase(string nomeDel)
 	}
 }
 
+int SistemaRes::getSize(){
+	return size;
+}

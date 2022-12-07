@@ -25,7 +25,7 @@ void SistemaUsuario::insert(Usuario newUsuario)
 
 			//INSERINDO TODOS OS RESIDUOS QUE O USUARIO TEM/QUER NO VETOR
 			for (int j = 0; j < numRes; j++)
-			{
+			{	
 				cout << "Nome do residuo " << j + 1 << endl;
 				cin >> resAux;
 
@@ -78,4 +78,8 @@ void SistemaUsuario::erase(string resDel)
 
 		}
 	}
+}
+
+int SistemaUsuario::getSize(){
+	return size;
 }

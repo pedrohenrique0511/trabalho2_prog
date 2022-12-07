@@ -21,6 +21,7 @@ public:
     Residuo getRes(int);    //READ
     void set(int, Residuo); //UPDATE
     void erase(string);     //DELETE
+    int getSize();
 
 
 };
